@@ -1,0 +1,31 @@
+# use olist;
+#
+# -- Segment customers into spend tiers (Low/Medium/High).
+# select * from customers;
+# select * from order_payments;
+# select * from orders;
+
+use olist;
+
+WITH customer_spend AS (
+    SELECT
+        c.customer_unique_id,
+        ROUND(SUM(op.payment_value), 2) AS total_spend
+    FROM customers c
+    INNER JOIN orders o
+        ON c.customer_id = o.customer_id
+    INNER JOIN order_payments op
+        ON o.order_id = op.order_id
+    GROUP BY c.customer_unique_id
+)
+
+SELECT
+    customer_unique_id,
+    total_spend,
+    CASE
+        WHEN total_spend < 500 THEN 'Low'
+        WHEN total_spend <= 1500 THEN 'Medium'
+        ELSE 'High'
+    END AS spend_tier
+FROM customer_spend
+ORDER BY total_spend DESC;

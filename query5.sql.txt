@@ -1,0 +1,44 @@
+# use olist;
+#
+# -- Rank top 3 products within each category by revenue.
+# select * from products;
+# select * from product_category;
+# select * from order_items;
+
+use olist;
+
+WITH product_revenue as (
+    SELECT
+        pc.product_category_name_english as product_category,
+        oi.product_id,
+        ROUND(SUM(oi.price), 2) AS total_revenue
+    FROM order_items as oi
+    INNER JOIN products as p
+        ON oi.product_id = p.product_id
+    INNER JOIN product_category pc
+        ON p.product_category_name = pc.product_category_name
+    GROUP BY
+        pc.product_category_name_english,
+        oi.product_id
+),
+
+ranked_products as (
+    SELECT
+        product_category,
+        product_id,
+        total_revenue,
+        ROW_NUMBER() OVER (
+            PARTITION BY product_category
+            ORDER BY total_revenue DESC
+        ) as rn
+    FROM product_revenue
+)
+
+SELECT
+    product_category,
+    product_id,
+    total_revenue,
+    rn as category_rank
+FROM ranked_products
+WHERE rn <= 3
+ORDER BY product_category, category_rank;

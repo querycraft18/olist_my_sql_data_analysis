@@ -1,0 +1,19 @@
+# use olist;
+#
+# Which product categories generate the most revenue?
+# select * from products;
+# select * from product_category;
+# select * from order_items;
+
+use olist;
+
+SELECT
+    pc.product_category_name_english as product_category,
+    ROUND(SUM(oi.price), 2) as total_revenue
+FROM order_items as oi
+INNER JOIN products as p
+    ON oi.product_id = p.product_id
+INNER JOIN product_category as pc
+    ON p.product_category_name = pc.product_category_name
+GROUP BY pc.product_category_name_english
+ORDER BY total_revenue DESC;

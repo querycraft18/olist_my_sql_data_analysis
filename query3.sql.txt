@@ -1,0 +1,28 @@
+# use olist;
+#
+# What is the month-over-month change in revenue?
+# select * from orders;
+# select * from order_payments;
+
+use olist;
+
+WITH monthly_revenue AS (
+    SELECT
+        DATE_FORMAT(o.order_purchase_timestamp, '%Y-%m') AS month,
+        ROUND(SUM(op.payment_value), 2) AS monthly_revenue
+    FROM orders as o
+    INNER JOIN order_payments as op
+        ON o.order_id = op.order_id
+    GROUP BY month
+)
+
+SELECT
+    month,
+    monthly_revenue,
+    LAG(monthly_revenue) OVER (ORDER BY month) AS previous_month_revenue,
+    ROUND(
+        monthly_revenue - LAG(monthly_revenue) OVER (ORDER BY month),
+        2
+    ) AS mom_change
+FROM monthly_revenue
+ORDER BY month;

@@ -1,0 +1,35 @@
+# use olist;
+#
+# -- What % of total revenue comes from the top category?
+# select * from product_category;
+# select * from order_items;
+# select * from products;
+
+use olist;
+
+WITH category_revenue AS
+(
+SELECT
+pc.product_category_name_english AS product_category,
+ROUND(SUM(oi.price), 2) AS category_revenue
+FROM product_category AS pc
+JOIN products AS p
+ON p.product_category_name = pc.product_category_name
+JOIN order_items AS oi
+ON oi.product_id = p.product_id
+GROUP BY
+pc.product_category_name_english
+)
+
+SELECT
+product_category,
+category_revenue AS top_category_revenue,
+ROUND(SUM(category_revenue) OVER (), 2) AS total_revenue,
+ROUND(
+category_revenue / SUM(category_revenue) OVER () * 100,
+2
+) AS revenue_percentage
+FROM category_revenue
+ORDER BY
+category_revenue DESC
+LIMIT 1;

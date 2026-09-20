@@ -1,0 +1,15 @@
+# use olist;
+#
+# What is the monthly revenue trend across the dataset?
+# select * from orders;
+# select * from order_payments;
+
+use olist;
+
+select
+    date_format(o.order_purchase_timestamp, '%Y-%m') as month,
+    round(sum(op.payment_value), 2) as monthly_revenue
+from orders as o
+inner join order_payments as op on o.order_id = op.order_id
+group by month
+order by month;
