@@ -38,17 +38,17 @@ The analysis answers the following business questions:
 Language & Database: MySQL
  
 SQL Techniques:
-	§ Relational Joins: Multi-table INNER JOIN operations linking customers, orders, order payments, order items, products, and product categories.
-	§ Aggregations & Grouping: SUM(), COUNT(), ROUND(), GROUP BY, and ORDER BY for revenue, customer spending, and product performance analysis.
-	§ Window Functions: ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...) for product ranking, LAG() OVER (ORDER BY ...) for month-over-month analysis, and SUM() OVER () for calculating total revenue and revenue contribution.
-	§ Common Table Expressions (CTEs): WITH clauses for breaking complex analysis into modular steps, including monthly revenue calculations, product revenue calculations, and customer spending analysis.
-	§ Conditional Logic: CASE WHEN ... THEN ... ELSE ... END for customer spend-tier segmentation into Low, Medium, and High.
-	§ Date & Time Analysis: DATE_FORMAT() for converting order timestamps into monthly periods and analyzing revenue trends over time.
-	§ Subqueries: Nested queries used to calculate and classify one-time and repeat customers.
-	§ Set Operations: UNION ALL for combining one-time buyer and repeat buyer results into a single customer behavior analysis.
-	§ Filtering & Ranking: WHERE, HAVING, ORDER BY, and LIMIT for filtering records, identifying customer groups, and retrieving top-performing customers and categories.
-	§ Column Aliasing: AS aliases for improving query readability and creating business-friendly output fields.
-	§ Multi-Stage Analysis: Combining CTEs, aggregations, joins, and window functions to solve complex business questions in multiple steps.
+§ Relational Joins: Multi-table INNER JOIN operations linking customers, orders, order payments, order items, 		products, and product categories.
+§ Aggregations & Grouping: SUM(), COUNT(), ROUND(), GROUP BY, and ORDER BY for revenue, customer spending, and product performance analysis.
+§ Window Functions: ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...) for product ranking, LAG() OVER (ORDER BY ...) for month-over-month analysis, and SUM() OVER () for calculating total revenue and revenue contribution.
+§ Common Table Expressions (CTEs): WITH clauses for breaking complex analysis into modular steps, including monthly revenue calculations, product revenue calculations, and customer spending analysis.
+§ Conditional Logic: CASE WHEN ... THEN ... ELSE ... END for customer spend-tier segmentation into Low, Medium, and High.
+§ Date & Time Analysis: DATE_FORMAT() for converting order timestamps into monthly periods and analyzing revenue trends over time.
+§ Subqueries: Nested queries used to calculate and classify one-time and repeat customers.
+§ Set Operations: UNION ALL for combining one-time buyer and repeat buyer results into a single customer behavior analysis.
+§ Filtering & Ranking: WHERE, HAVING, ORDER BY, and LIMIT for filtering records, identifying customer groups, and retrieving top-performing customers and categories.
+§ Column Aliasing: AS aliases for improving query readability and creating business-friendly output fields.
+§ Multi-Stage Analysis: Combining CTEs, aggregations, joins, and window functions to solve complex business questions in multiple steps.
  
 Data Analysis Skills:
 	§ Customer Analysis: Identifying top customers based on total spending and classifying customers by purchasing behavior.
