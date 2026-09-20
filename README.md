@@ -38,6 +38,9 @@ The analysis answers the following business questions:
 Language & Database: MySQL
 
 SQL Techniques:
+
+Window Functions: ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...), LAG() OVER (...), SUM() OVER ()
+Common Table Expressions (CTEs): Modular WITH clauses for multi-stage aggregation
 *Relational Joins: Multi-table INNER JOIN operations linking customers, orders, order payments, order items, products, and product categories.
 *Aggregations & Grouping: SUM(), COUNT(), ROUND(), GROUP BY, and ORDER BY for revenue, customer spending, and product performance analysis.
 *Window Functions: ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...) for product ranking, LAG() OVER (ORDER BY ...) for month-over-month analysis, and SUM() OVER () for calculating total revenue and revenue contribution.
