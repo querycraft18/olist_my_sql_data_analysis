@@ -38,7 +38,9 @@ The analysis answers the following business questions:
 Language & Database: MySQL
 
 SQL Techniques:
+
 Relational Joins: Multi-table INNER JOIN operations linking customers, orders, order payments, order items, products, and product categories.
+
 Aggregations & Grouping: SUM(), COUNT(), ROUND(), GROUP BY, and ORDER BY for revenue, customer spending, and product performance analysis.
 
 
