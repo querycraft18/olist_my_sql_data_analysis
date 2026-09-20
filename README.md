@@ -2,91 +2,64 @@
 
 ## Overview
 
-This project analyzes the **Olist e-commerce dataset** using SQL to uncover insights related to customers, revenue, products, and purchasing behavior.
-
-The analysis focuses on identifying high-value customers, understanding revenue trends, evaluating product and category performance, and segmenting customers based on their spending and purchase frequency.
-
-The project uses **MySQL** queries and demonstrates practical SQL techniques such as joins, aggregation, Common Table Expressions (CTEs), window functions, conditional logic, and ranking.
+This project explores Olist's Brazilian e-commerce data to understand customer purchases, products, orders, and sales performance. It has 9 related tables covering order activity from September 2016 to October 2018. Since the tables are connected through different IDs, careful joins are needed to avoid counting the same order, payment, or customer more than once. This project focuses on using SQL to turn the raw data into useful business insights.
 
 ## Business Questions
 
 The analysis answers the following business questions:
 
-1. Who are the **top 10 customers by total amount spent**?
-2. What is the **monthly revenue trend** across the dataset?
-3. What is the **month-over-month change in revenue**?
-4. Which **product categories generate the most revenue**?
-5. What are the **top 3 products within each category by revenue**?
-6. How can customers be segmented into **Low, Medium, and High spend tiers**?
-7. How many customers are **repeat buyers versus one-time buyers**?
-8. What percentage of **total revenue comes from the top-performing product category**?
+1. Who are the top 10 customers by total amount spent?
+2. What is the monthly revenue trend across the dataset?
+3. What is the month-over-month change in revenue?
+4. Which product categories generate the most revenue?
+5. What are the top 3 products within each category by revenue?
+6. How can customers be segmented into Low, Medium, and High spend tiers?
+7. How many customers are repeat buyers versus one-time buyers?
+8. What percentage of total revenue comes from the top-performing product category?
 
 ## Key Findings
 
-The SQL analysis is designed to provide insights into the following areas:
+1. The business has a retention gap, not a customer acquisition gap: The customer base is overwhelmingly made up of one-time buyers, with 93,099 customers (96.9%) purchasing only once compared with just 2,997 repeat buyers (3.1%), while the top 10 customers each spent at least R$4,764.34 and the highest spender reached R$13,664.08. This means Olist has a clear opportunity to increase customer lifetime value by converting more first-time buyers into repeat customers through personalized follow-ups, cross-category recommendations, and targeted incentives after the first purchase. The combination of a very large one-time customer base and a smaller group of high-spending customers creates a strong opportunity for customer segmentation and retention-focused marketing.
 
-### Customer Value
-- Identifies the top 10 customers based on their total payment value.
-- Calculates total customer spending using customer, order, and payment data.
-- Segments customers into:
-  - **Low:** total spend below 500
-  - **Medium:** total spend from 500 to 1,500
-  - **High:** total spend above 1,500
+2. Revenue is concentrated in winning categories, but no single category dominates: Health & Beauty generated the most revenue at R$1.259M, followed by Watches & Gifts (R$1.205M) and Bed, Bath & Table (R$1.037M), yet even the top category represented only 9.39% of total product revenue, while individual products such as the top Health & Beauty product generated R$63,885. This means Olist has a relatively diversified revenue base rather than depending on one dominant category, while its strongest categories and products provide clear opportunities for expanding successful assortments, improving product visibility, and cross-selling complementary products. The key finding is not simply that Health & Beauty leads, but that several category “engines” contribute meaningfully to overall revenue.
 
-### Revenue Performance
-- Calculates monthly revenue based on order purchase dates and payment values.
-- Measures month-over-month revenue changes using the `LAG()` window function.
-- Identifies the product category with the highest revenue and calculates its contribution to total category revenue.
+3. Revenue growth has strong momentum but also significant volatility: Monthly revenue increased from R$138K in January 2017 to more than R$1.16M by April 2018, with the largest positive month-over-month increase occurring in November 2017 (+R$415K), but the data also shows an extreme decline of approximately R$1.02M in September 2018. This means the business demonstrated substantial growth capacity while also experiencing large fluctuations that require careful interpretation. In particular, the September–October decline should not automatically be treated as a genuine loss of demand because the Olist dataset has incomplete coverage toward the end of the period; instead, management should investigate data completeness, order activity, and seasonality before using those months for forecasting or performance evaluation.
 
-### Product Performance
-- Ranks product categories according to total revenue.
-- Identifies the top 3 revenue-generating products within each product category using `ROW_NUMBER()`.
-
-### Customer Behavior
-- Compares the number of **one-time buyers** with **repeat buyers**.
-- Customers with one order are classified as one-time buyers, while customers with more than one order are classified as repeat buyers.
-
-> **Note:** The attached SQL files contain the analysis queries but do not include the query output/results. Therefore, specific numerical findings are not stated in this README.
 
 ## Recommendations
 
-Based on the types of analysis included in this project, the results can be used to:
+1. Launch a data-driven customer retention program: Segment the 93,099 one-time buyers based on their purchase history and send personalized follow-ups, cross-category recommendations, and targeted incentives within 30–60 days after their first purchase. Prioritize high-value customers and customers who purchased from the strongest categories to increase repeat purchases and customer lifetime value.
 
-- Identify and understand **high-value customers**.
-- Develop targeted strategies for different **customer spending segments**.
-- Monitor **monthly revenue performance** and changes over time.
-- Investigate periods with significant **month-over-month revenue changes**.
-- Focus product and marketing efforts on **high-revenue categories and products**.
-- Develop strategies to encourage **one-time customers to become repeat buyers**.
-- Assess revenue concentration and dependency on the **top-performing product category**.
+2. Scale winning categories while strengthening revenue planning: Increase inventory, advertising visibility, and promotional placement for high-performing products across Health & Beauty, Watches & Gifts, and Bed, Bath & Table, while using cross-selling to connect customers across these categories. Because no single category contributes more than 10% of revenue, Olist can pursue growth across multiple category leaders rather than over-investing in one segment, while monitoring monthly sales and data completeness to distinguish genuine demand changes from incomplete reporting (September–October 2018).
 
-These recommendations should be refined after reviewing the actual SQL query results.
 
 ## Tools & Skills
 
-### Tools
-- MySQL
-- MySQL Workbench
-- GitHub
+Language & Database: MySQL
 
-### SQL Skills Demonstrated
-- `SELECT`
-- `JOIN`
-- `INNER JOIN`
-- `GROUP BY`
-- `ORDER BY`
-- `LIMIT`
-- Aggregate functions such as `SUM()` and `COUNT()`
-- `ROUND()`
-- `DATE_FORMAT()`
-- Common Table Expressions (`WITH`)
-- Window functions:
-  - `LAG()`
-  - `ROW_NUMBER()`
-  - `SUM() OVER()`
-- `CASE` statements
-- Customer segmentation
-- Ranking and comparative analysis
+SQL Techniques:
+Relational Joins: Multi-table INNER JOIN operations linking customers, orders, order payments, order items, products, and product categories.
+Aggregations & Grouping: SUM(), COUNT(), ROUND(), GROUP BY, and ORDER BY for revenue, customer spending, and product performance analysis.
+Window Functions: ROW_NUMBER() OVER (PARTITION BY ... ORDER BY ...) for product ranking, LAG() OVER (ORDER BY ...) for month-over-month analysis, and SUM() OVER () for calculating total revenue and revenue contribution.
+Common Table Expressions (CTEs): WITH clauses for breaking complex analysis into modular steps, including monthly revenue calculations, product revenue calculations, and customer spending analysis.
+Conditional Logic: CASE WHEN ... THEN ... ELSE ... END for customer spend-tier segmentation into Low, Medium, and High.
+Date & Time Analysis: DATE_FORMAT() for converting order timestamps into monthly periods and analyzing revenue trends over time.
+Subqueries: Nested queries used to calculate and classify one-time and repeat customers.
+Set Operations: UNION ALL for combining one-time buyer and repeat buyer results into a single customer behavior analysis.
+Filtering & Ranking: WHERE, HAVING, ORDER BY, and LIMIT for filtering records, identifying customer groups, and retrieving top-performing customers and categories.
+Column Aliasing: AS aliases for improving query readability and creating business-friendly output fields.
+Multi-Stage Analysis: Combining CTEs, aggregations, joins, and window functions to solve complex business questions in multiple steps.
+
+Data Analysis Skills:
+Customer Analysis: Identifying top customers based on total spending and classifying customers by purchasing behavior.
+Customer Segmentation: Creating Low, Medium, and High spending tiers using business-defined thresholds.
+Customer Retention Analysis: Comparing one-time buyers versus repeat buyers.
+Revenue Analysis: Calculating monthly revenue and evaluating month-over-month revenue changes.
+Product Performance Analysis: Ranking products within each category based on revenue.
+Category Performance Analysis: Identifying the highest-revenue product categories and measuring their contribution to total revenue.
+Time-Series Analysis: Examining revenue trends and changes across monthly periods.
+Revenue Contribution Analysis: Calculating the percentage contribution of the top product category to total revenue.
+Business Question Translation: Converting business questions into structured SQL queries and measurable outputs.
 
 ## Files
 
@@ -106,12 +79,19 @@ These recommendations should be refined after reviewing the actual SQL query res
 The analysis uses the **Olist e-commerce dataset**, including tables related to:
 
 - Customers
+- Geolocation
 - Orders
 - Order Payments
 - Order Items
+- Order Reviews
 - Products
 - Product Categories
+- Sellers
 
 ## Project Purpose
 
-This project demonstrates how SQL can be used to transform raw e-commerce data into **business-focused insights** that support customer analysis, revenue monitoring, product performance evaluation, and decision-making.
+The purpose of this project is to analyze the Olist e-commerce dataset using SQL and transform transactional data into meaningful business insights.
+
+The analysis focuses on customer spending and behavior, revenue trends, product and category performance, customer segmentation, and repeat purchasing patterns. It answers key business questions such as identifying high-value customers, tracking monthly and month-over-month revenue, ranking top-performing products and categories, segmenting customers by spending level, and comparing one-time versus repeat buyers.
+
+This project also demonstrates practical SQL and data analysis skills, including multi-table joins, aggregations, CTEs, subqueries, conditional logic, date analysis, set operations, and window functions. Overall, it showcases the use of SQL to solve business questions and support data-driven decision-making.
