@@ -61,6 +61,7 @@ Column Aliasing: AS aliases for improving query readability and creating busines
 
 Multi-Stage Analysis: Combining CTEs, aggregations, joins, and window functions to solve complex business questions in multiple steps.
 
+
 Data Analysis Skills:
 
 Customer Analysis: Identifying top customers based on total spending and classifying customers by purchasing behavior.
